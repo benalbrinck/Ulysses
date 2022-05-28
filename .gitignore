@@ -1,0 +1,9 @@
+_ideas.txt
+_todo.txt
+
+.dockerignore
+Dockerfile
+
+__pycache__
+credentials
+logs
