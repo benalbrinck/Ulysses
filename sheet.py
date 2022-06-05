@@ -13,7 +13,12 @@ class Sheet:
         creds = ServiceAccountCredentials.from_json_keyfile_name(creds_path, scope)
         client = gspread.authorize(creds)
 
-        self._sheet = client.open('Financial Suite')
+        # Get sheet
+        with open('setup/config.yml') as file:
+            config = yaml.safe_load(file)
+
+        sheet_name = config['sheet_name']
+        self._sheet = client.open(sheet_name)
     
     def get_worksheet_values(self, worksheet_name: str) -> tuple[list, list]:
          # Get worksheet and column values
