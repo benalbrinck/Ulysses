@@ -1,10 +1,15 @@
+import yaml
 from datetime import datetime
 from sheet import Sheet
 
 
 def get_rules(sheet: Sheet) -> list:
     # Get Rules worksheet values
-    column_names, worksheet_values = sheet.get_worksheet_values('Rules')
+    with open('setup/config.yml') as file:
+        config = yaml.safe_load(file)
+
+    rules_name = config['rules_name']
+    column_names, worksheet_values = sheet.get_worksheet_values(rules_name)
 
     # Load rows into dictionaries
     rules = []
@@ -36,7 +41,11 @@ def get_rules(sheet: Sheet) -> list:
 
 def get_ui_rules(sheet: Sheet) -> dict:
     # Get UI Rules worksheet values
-    column_names, worksheet_values = sheet.get_worksheet_values('UI Rules')
+    with open('setup/config.yml') as file:
+        config = yaml.safe_load(file)
+
+    ui_rules_name = config['ui_rules_name']
+    column_names, worksheet_values = sheet.get_worksheet_values(ui_rules_name)
 
     # Load rows into dictionary
     ui_rules = {}

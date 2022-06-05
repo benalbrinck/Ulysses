@@ -1,10 +1,15 @@
+import yaml
 from datetime import datetime
 from sheet import Sheet
 
 
 def get_transactions(sheet: Sheet) -> list:
     # Get Rules worksheet values
-    column_names, worksheet_values = sheet.get_worksheet_values('Transactions')
+    with open('setup/config.yml') as file:
+        config = yaml.safe_load(file)
+
+    transactions_name = config['transactions_name']
+    column_names, worksheet_values = sheet.get_worksheet_values(transactions_name)
 
     # Load rows into dictionaries
     rules = []

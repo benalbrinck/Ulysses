@@ -5,5 +5,5 @@ _todo.txt
 Dockerfile
 
 __pycache__
-credentials
 logs
+setup

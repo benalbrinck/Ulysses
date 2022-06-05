@@ -1,4 +1,5 @@
 import gspread
+import yaml
 from oauth2client.service_account import ServiceAccountCredentials
 
 
@@ -28,7 +29,12 @@ class Sheet:
         return column_names, worksheet_values
     
     def update_dash(self, splits: dict, ui_ruleset: dict) -> None:
-        worksheet = self._sheet.worksheet('Dash')
+        # Get dashboard name and worksheet
+        with open('setup/config.yml') as file:
+            config = yaml.safe_load(file)
+
+        dashboard_name = config['dashboard_name']
+        worksheet = self._sheet.worksheet(dashboard_name)
 
         # Write split values to cells specified in UI rules
         for split_name in ui_ruleset:
