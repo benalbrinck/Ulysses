@@ -50,7 +50,7 @@ Under the Transactions worksheet of the example Excel sheet, there are some exam
 - Add: add money to the target split
 - Spend: remove money from the target split
 - Drain: this moves money between accounts, usually at the end of a month. This is configured in the Rules worksheet. See the below [Rules](#rules) section for more details.
-- Custom transactions: these are created in the Rules worksheet. See the below [Rules](###rules) section for more details.
+- Custom transactions: these are created in the Rules worksheet. See the below [Rules](#rules) section for more details.
 
 The Add and Spend transactions require a target, and the drain does not require either a target or a delta.
 
