@@ -1,3 +1,5 @@
+"""Runs the main Ulysses method every five minutes."""
+
 import ulysses
 from time import sleep
 

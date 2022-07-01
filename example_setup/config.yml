@@ -1,0 +1,5 @@
+sheet_name: 'Example'
+dashboard_name: 'Dash'
+transactions_name: 'Transactions'
+rules_name: 'Rules'
+ui_rules_name: 'UI Rules'

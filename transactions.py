@@ -1,10 +1,21 @@
+"""Gets transactions from the Google Sheet."""
+
 import yaml
 from datetime import datetime
 from sheet import Sheet
 
 
 def get_transactions(sheet: Sheet) -> list:
-    # Get Rules worksheet values
+    """Get transactions from the Transactions worksheet.
+
+    Parameters:
+        sheet (Sheet): the sheet to get transactions from.
+    
+    Returns:
+        transactions (list): a list of transactions. Each transaction is a dictionary with the columns as the keys.
+    """
+
+    # Get Transaction worksheet values
     with open('setup/config.yml') as file:
         config = yaml.safe_load(file)
 
@@ -12,25 +23,25 @@ def get_transactions(sheet: Sheet) -> list:
     column_names, worksheet_values = sheet.get_worksheet_values(transactions_name)
 
     # Load rows into dictionaries
-    rules = []
+    transactions = []
 
     for row in worksheet_values:
-        rule = {}
+        transaction = {}
 
         for i, name in enumerate(column_names):
             if name == 'delta':
                 # If delta column, parse value as float
-                rule[name] = float(row[i].strip('$')) if row[i] != '' else 0
+                transaction[name] = float(row[i].strip('$')) if row[i] != '' else 0
             elif name == 'date':
                 # If date column, parse value as datetime
-                rule[name] = datetime.strptime(row[i], '%m/%d/%y') if row[i] != '' else datetime.min
+                transaction[name] = datetime.strptime(row[i], '%m/%d/%y') if row[i] != '' else datetime.min
             else:
                 # Otherwise, keep value as string
-                rule[name] = row[i]
+                transaction[name] = row[i]
         
-        rules.append(rule)
+        transactions.append(transaction)
     
-    return rules
+    return transactions
 
 
 if __name__ == '__main__':

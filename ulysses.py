@@ -1,3 +1,5 @@
+"""Includes the main Ulysses method, which gets all transactions, applies them to the splits, and sends them to the dashboard."""
+
 import logging
 import os
 import rules
@@ -7,6 +9,12 @@ from sheet import Sheet
 
 
 def main(logger: logging.Logger) -> None:
+    """Main method. Gets all transactions, applies them to the splits, and sends them to the dashboard.
+
+    Parameters:
+        logger (logging.Logger): what to log information to.
+    """
+
     # Get sheet, rules, and transactions
     logger.info('Getting sheet, rules, and transactions...')
     sheet = Sheet('credentials/client_secret.json')
@@ -37,6 +45,15 @@ def main(logger: logging.Logger) -> None:
 
 
 def render(transaction: dict, ruleset: list, splits: dict) -> dict:
+    """Perform a transaction and parse rules for it.
+
+    Parameters:
+        transaction (dict): the transaction dictionary, which includes transaction_name, type, delta, target, and date.
+    
+    Returns:
+        splits (dict): the inputted splits dictionary after the transaction has been performed.
+    """
+
     # Filter rules by transaction date
     filtered_rules = [x for x in ruleset if x['start_date'] <= transaction['date'] <= x['end_date']]
     

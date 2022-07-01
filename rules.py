@@ -1,9 +1,20 @@
+"""Gets rules and UI rules from the Google Sheet."""
+
 import yaml
 from datetime import datetime
 from sheet import Sheet
 
 
 def get_rules(sheet: Sheet) -> list:
+    """Get rules from the Rules worksheet.
+
+    Parameters:
+        sheet (Sheet): the Google Sheet to get rules from.
+
+    Returns:
+        rules (list): a list of rules. Each rule is a dictionary with each column value.
+    """
+
     # Get Rules worksheet values
     with open('setup/config.yml') as file:
         config = yaml.safe_load(file)
@@ -40,6 +51,15 @@ def get_rules(sheet: Sheet) -> list:
 
 
 def get_ui_rules(sheet: Sheet) -> dict:
+    """Get UI rules from the UI Rules worksheet.
+
+    Parameters:
+        sheet (Sheet): the Google Sheet to get UI rules from.
+
+    Returns:
+        ui_rules (dict): a dictionary with the split name as the key and the cell as the value.
+    """
+
     # Get UI Rules worksheet values
     with open('setup/config.yml') as file:
         config = yaml.safe_load(file)
